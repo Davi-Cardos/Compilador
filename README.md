@@ -1,5 +1,4 @@
-# Compilador Foca
-O Foca é o inicio do desenvolvimento de um compilador que é demonstrado na disciplina Compiladores.
+# Compilador Flutuante
 
 ## Instalação
 
