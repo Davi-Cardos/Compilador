@@ -4,6 +4,8 @@
 #include <sstream>
 
 #define YYSTYPE atributos
+#define TRUE 1
+#define FALSE 0
 
 using namespace std;
 
@@ -23,7 +25,8 @@ string gentempcode();
 
 %token TK_NUM
 %token TK_MAIN TK_ID TK_TIPO_INT TK_TIPO_FLOAT
-%token TK_FIM TK_ERROR TK_TIPO_BOOLEAN TK_TIPO_CHAR
+%token TK_FIM TK_ERROR TK_TIPO_BOOL TK_TIPO_CHAR
+%token TK_CHAR TK_BOOL TK_REAL
 
 %start S
 
@@ -76,7 +79,7 @@ TIPO        : TK_TIPO_INT
 			{}
 			| TK_TIPO_CHAR
 			{}
-			| TK_TIPO_BOOLEAN
+			| TK_TIPO_BOOL
 			;
 
 E 			: E '+' E
@@ -104,6 +107,21 @@ E 			: E '+' E
 			{
 				$$.label = gentempcode();
 				$$.traducao = "\t" + $$.label + " = " + $1.label + ";\n";
+			}
+			| TK_CHAR
+			{
+				$$.label = gentempcode();
+				$$.traducao = "\t" + $$.label + " = " + $1.label + "; \n";
+			}
+			| TK_BOOL
+			{
+				$$.label = gentempcode();
+				$$.traducao = "\t" + $$.label + " = " + $1.label + "; \n";
+			}
+			| TK_REAL
+			{
+				$$.label = gentempcode();
+				$$.traducao = "\t" + $$label " = " + $1.label +";\n";
 			}
 			| E '*' E 
 			{
