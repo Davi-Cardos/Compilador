@@ -23,7 +23,7 @@ string gentempcode();
 
 %token TK_NUM
 %token TK_MAIN TK_ID TK_TIPO_INT TK_TIPO_FLOAT
-%token TK_FIM TK_ERROR
+%token TK_FIM TK_ERROR TK_TIPO_BOOLEAN TK_TIPO_CHAR
 
 %start S
 
@@ -74,6 +74,9 @@ TIPO        : TK_TIPO_INT
 			{}
 			| TK_TIPO_FLOAT
 			{}
+			| TK_TIPO_CHAR
+			{}
+			| TK_TIPO_BOOLEAN
 			;
 
 E 			: E '+' E
