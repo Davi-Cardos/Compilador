@@ -25,6 +25,10 @@ ID {LETRA}({LETRA}|{NUM})*
 
 "float"     {yylval.tipo = "float"; return TK_TIPO_FLOAT;}
 
+"char"      {yylval.tipo = "char";  return TK_TIPO_CHAR;}    
+
+"boolean"   {yylval.tipo = "boolean"; return TK_TIPO_CHAR;}
+
 [(){}[\];,]	{ return *yytext; }
 
 [+\-*/]		{ return *yytext; }
