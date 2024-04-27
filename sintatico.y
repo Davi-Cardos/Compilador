@@ -13,6 +13,7 @@ struct atributos
 {
 	string label;
 	string traducao;
+	string tipo;
 };
 
 int yylex(void);
@@ -21,7 +22,7 @@ string gentempcode();
 %}
 
 %token TK_NUM
-%token TK_MAIN TK_ID TK_TIPO_INT
+%token TK_MAIN TK_ID TK_TIPO_INT TK_TIPO_FLOAT
 %token TK_FIM TK_ERROR
 
 %start S
@@ -69,6 +70,12 @@ COMANDO 	: E ';'
 			}
 			;
 
+TIPO        : TK_TIPO_INT 
+			{}
+			| TK_TIPO_FLOAT
+			{}
+			;
+
 E 			: E '+' E
 			{
 				$$.label = gentempcode();
@@ -94,6 +101,27 @@ E 			: E '+' E
 			{
 				$$.label = gentempcode();
 				$$.traducao = "\t" + $$.label + " = " + $1.label + ";\n";
+			}
+			| E '*' E 
+			{
+				$$.label = gentempcode();
+				$$.traducao = $1.traducao + $3.traducao + "\t" + $$.label + "=" + $1.label + " * " + $3.label + ";\n"; 
+			}
+			| E '/' E
+			{
+				$$.label = gentempcode();
+				$$.traducao = $1.traducao + $3.traducao + "\t" + $$.label + "=" + $1.label + " / " + $3.label + "; \n";
+			}
+			| '(' E ')'
+			{
+				$$ = $2;
+			}
+			| '(' TIPO ')' '(' E ')'
+			{
+				$$.tipo = $2.tipo;
+				$$.label = gentempocode();
+				$$.traducao = $5.traducao + "\t" + $$.label + "= (" +$2.tipo + ")" + $5.label + ";\n";
+
 			}
 			;
 
