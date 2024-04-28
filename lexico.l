@@ -20,15 +20,15 @@ ID {LETRA}({LETRA}|{NUM})*
 
 {DELIM} 	{}
 
-"main"		  { return TK_MAIN;}
+"main"		{return TK_MAIN;}
 
-"int"		    { yylval.tipo = "int"; return TK_TIPO_INT;}
+"int"		{yylval.tipo = "int"; return TK_TIPO_INT;}
 
-"float"     { yylval.tipo = "float"; return TK_TIPO_FLOAT;}
+"float"     {yylval.tipo = "float"; return TK_TIPO_FLOAT;}
 
-"char"      { yylval.tipo = "char";  return TK_TIPO_CHAR;}    
+"char"      {yylval.tipo = "char";  return TK_TIPO_CHAR;}    
 
-"bool"      { yylval.tipo = "bool"; return TK_TIPO_BOOL;}
+"bool"   {yylval.tipo = "bool"; return TK_TIPO_BOOL;}
 
 
 
@@ -38,12 +38,11 @@ ID {LETRA}({LETRA}|{NUM})*
 
 "="		    { return '='; }
 
-{NUM}		       { yylval.label = yytext; yylval.tipo = "int"; return TK_NUM; }
-{ID}		       { yylval.label = yytext; return TK_ID; }
-{CHAR}         { yylval.label = yytext; yylval.tipo = "char"; return TK_CHAR;}
+{NUM}		 { yylval.label = yytext; yylval.tipo = "int"; return TK_NUM; }
+{ID}		 { yylval.label = yytext; return TK_ID; }
+{CHAR}       { yylval.label = yytext; yylval.tipo = "char"; return TK_CHAR;}
 "TRUE"|"FALSE" { yylval.label = yytext; yylval.tipo = "bool"; return TK_BOOL;}
-{REAL}         { yylval.label = yytext; yylval.tipo = "float"; return TK_REAL;}
-{FIM_LINHA}    { num_linha = yylineno;}
+{REAL}       { yylval.label = yytext; yylval.tipo = "float"; return TK_REAL;}
 
 
 .			{ *yytext; }
